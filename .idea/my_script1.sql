@@ -1,19 +1,20 @@
 create table customers
 (
-    id           serial primary key not null,
-    name         varchar(250)       not null,
-    surname      varchar(250)       not null,
+    id           int primary key auto_increment,
+    name         varchar(250) not null,
+    surname      varchar(250) not null,
     age          int check ( age > -1 ),
-    phone_number long               not null
+    phone_number long         not null
 );
 
 create table orders
 (
-    id           serial primary key      not null,
+    id           int primary key auto_increment,
     date         timestamp default now() not null,
     customer_id  int                     not null,
     product_name varchar(250)            not null,
-    amount       int                     not null
+    amount       int                     not null,
+    foreign key (customer_id) references customers (id)
 );
 
 INSERT INTO customers (name, surname, age, phone_number)
